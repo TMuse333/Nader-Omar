@@ -2,6 +2,25 @@ import Image from "next/image";
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
+const aspects = [
+  {
+    title: "Expert Guidance, Start to Finish",
+    description:
+      "From market analysis to closing day, I handle every step with strategy and precision.",
+  },
+  {
+    title: "Expanded Buyer Reach",
+    description:
+      "Fluent in English, French, and Arabic — connecting your listing to more qualified buyers.",
+  },
+  {
+    title: "Reliable Problem Solver",
+    description:
+      "When issues come up (and they will), I stay calm, proactive, and always in your corner.",
+  },
+];
+
+
 const TextBoxPoints = () => {
   const gradientRef = useRef(null);
   const isInView = useInView(gradientRef, { once: true, margin: "-100px" });
@@ -16,7 +35,9 @@ const TextBoxPoints = () => {
         initial={{ scale: 0.8 }}
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="bg-gradient-to-br from-orange-100 to-blue-200 md:h-[70vh] flex items-center justify-center rounded-2xl text-center pt-12"
+        className="
+        bg-gradient-to-br from-[#cfe3f5] to-[#a5c8eb]
+          flex items-center justify-center rounded-2xl text-center pt-12"
       >
         <section className="flex flex-col md:flex-row items-center justify-center pt-1 gap-6 px-4">
           {/* Animated Text Block */}
@@ -27,41 +48,44 @@ const TextBoxPoints = () => {
             className="flex flex-col max-w-2xl mx-auto px-4 relative"
           >
             <h2 className="text-2xl font-semibold mb-2">Hello, I am Nader</h2>
-            <p>
-             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate numquam, eaque nam amet nulla quis fugit reiciendis voluptatum alias. Cumque itaque, qui eius consequatur eaque velit quibusdam minima eveniet aperiam ipsam pariatur vero veritatis facilis sapiente in rem, aut dolorum quisquam ex, quidem ab tempora. Sunt ipsum quod ab temporibus!
+            <p className="text-base leading-relaxed text-left">
+              Hello, I&apos;m Nader — your <span className="font-bold">competitive edge</span> in the real estate market. From 
+              <span className="font-bold"> pricing strategies</span> to <span className="font-bold"> negotiations</span> and 
+              <span className="font-bold"> complex paperwork</span>, I handle the hard parts so you can focus on your next chapter. 
+              Whether you&apos;re buying or selling, I bring <span className="font-bold"> clarity</span>, 
+              <span className="font-bold"> speed</span>, and <span className="font-bold"> confidence</span> to every step — all while 
+              ensuring you get the <span className="font-bold"> best possible deal</span>. With deep 
+              <span className="font-bold"> local insight</span> and <span className="font-bold"> multilingual communication</span> in 
+              English, French, and Arabic, I help you reach more buyers and navigate every situation with ease.
+              <br /><br />
+              I&apos;ve spent over <span className="font-bold">15 years</span> leading customer-facing teams, solving 
+              <span className="font-bold"> high-pressure problems</span>, and guiding people through 
+              <span className="font-bold"> life-changing decisions</span>. I&apos;ve lived in Halifax since 2015, own 
+              <span className="font-bold"> rental properties</span> both here and overseas, and treat every client like family — 
+              because I&apos;ve been in your shoes.
             </p>
+
             <section className="flex flex-col md:flex-row justify-center items-center gap-10 py-10 px-6 text-center">
-        {[1, 2, 3].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.6 + i * 0.2, duration: 0.5 }}
-            className="flex flex-col items-center max-w-xs"
-          >
-            <Image
-              src="/check-circle.svg"
-              alt="Check"
-              width={40}
-              height={40}
-              className="mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">
-              {i === 0 && "Trusted Experience"}
-              {i === 1 && "Local Expertise"}
-              {i === 2 && "Proven Results"}
-            </h3>
-            <p>
-              {i === 0 &&
-                "Over a decade helping buyers and sellers in the HRM area."}
-              {i === 1 &&
-                "Deep knowledge of Halifax, Lower Sackville, and surrounding areas."}
-              {i === 2 &&
-                "All of my clients have gotten great deals on their real estate"}
-            </p>
-          </motion.div>
-        ))}
-      </section>
+              {aspects.map(({ title, description }, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.6 + i * 0.2, duration: 0.5 }}
+                  className="flex flex-col items-center max-w-xs"
+                >
+                  <Image
+                    src="/check-circle.svg"
+                    alt="Check"
+                    width={40}
+                    height={40}
+                    className="mb-4"
+                  />
+                  <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                  <p>{description}</p>
+                </motion.div>
+              ))}
+            </section>
           </motion.section>
 
           {/* Animated Image */}
@@ -80,9 +104,6 @@ const TextBoxPoints = () => {
           </motion.div>
         </section>
       </motion.section>
-
-      {/* Feature Points Section */}
-    
     </section>
   );
 };

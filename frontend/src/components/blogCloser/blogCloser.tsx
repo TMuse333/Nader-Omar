@@ -18,7 +18,7 @@ const BlogCloser: React.FC<BlogCloserProps> = ({
   header,
   description,
   buttonText = "Contact Me",
-  buttonHref = "/contact",
+ 
   text2,
   link2,
 }) => {
@@ -63,10 +63,10 @@ const BlogCloser: React.FC<BlogCloserProps> = ({
   ];
 
   const socials = [
-    { src: "/instagram.webp", alt: "Facebook", href: "https://www.facebook.com/chris.crowell.12" },
-    { src: "/facebook.webp", alt: "TikTok", href: "https://www.tiktok.com/@chriscrowell3f" },
+    { src: "/instagram.webp", alt: "Facebook", href: "/" },
+    { src: "/facebook.webp", alt: "TikTok", href: "/" },
 
-    { src: "/tik-tok-logo.webp", alt: "Instagram", href: "https://www.instagram.com/chris.yournetworkrealtor/" },
+    { src: "/tik-tok-logo.webp", alt: "Instagram", href: "/" },
   ];
 
   return (

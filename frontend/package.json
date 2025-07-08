@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "focusflow-components": "^1.0.99",
+    "focusflow-components": "^1.0.100",
     "framer-motion": "^12.17.3",
     "next": "15.3.3",
     "react": "^19.0.0",
