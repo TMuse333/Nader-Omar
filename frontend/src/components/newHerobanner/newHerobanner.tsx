@@ -109,7 +109,7 @@ const NewHeroBanner = ({
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               onAnimationComplete={handleTitleComplete}
-              className=" md:text-md text-red-200 font-bold text-black mb-4"
+              className=" md:text-md  font-bold text-black mb-4"
             >
               {titleText}
             </motion.h1>
