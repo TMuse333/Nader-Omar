@@ -2,12 +2,13 @@
 import InteractiveMap from "@/components/map/map";
 // import CarouselHero from "@/components/tempHero/hero";
 import TextBoxPoints from "@/components/textBoxPoints/textBoxPoints";
-import { aboutFallRiver, aboutFallRiverFeatureBox, areaImages, closingStatement, newHeroData, whyNader } from "@/data/data";
+import { aboutFallRiver, areaImages, closingStatement, newHeroData, whyNader } from "@/data/data";
 import React from "react";
-import { Carousel, CarouselGrid, FeatureBoxes, TextAndList, VerticalImageTextBox } from "focusflow-components";
+import { Carousel, CarouselGrid, TextAndList, VerticalImageTextBox } from "focusflow-components";
 import BlogCloser from "@/components/blogCloser/blogCloser";
 import NewHeroBanner from "@/components/newHerobanner/newHerobanner";
 import Footer from "@/components/footer/footer";
+import FeatureBoxes from "@/components/featureBoxes/featureBoxes";
 
 
 const Homepage = () => {
@@ -37,7 +38,7 @@ px-4 max-w-[1200px]">
             {...aboutFallRiver}
             />
           <FeatureBoxes
-          {...aboutFallRiverFeatureBox}
+         
           />
             <TextAndList
             {...whyNader}
