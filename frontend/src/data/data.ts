@@ -250,4 +250,13 @@ export const heroData = {
     boxTextColor: "text-black",
   };
   
+  export  const serviceHeroBannerData = {
+    src: "/home.jpeg",
+    alt: "Modern home in Fall River, Nova Scotia",
+    title: "Buy Smarter. Sell Faster. Win in Fall River Real Estate.",
+    description:
+      "With 15+ years of strategic guidance, data-backed decisions, and multilingual support, I help you navigate the real estate market with confidence—and deliver results that matter.",
+    buttonText: "Start Your Journey",
+    destination: "/contact"
+  };
   

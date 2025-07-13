@@ -104,50 +104,52 @@ const FeatureBoxes = (): React.JSX.Element => {
   const boxData = [
     {
       src: "/nader.jpg",
-      alt: "Lake view in Fall River",
-      title: "Lakes & Outdoor Living",
+      alt: "Kayaking on Lake Thomas in Fall River",
+      title: "Lakes & Outdoor Lifestyle",
       description:
-        "Surrounded by lakes and parks, Fall River is perfect for kayaking, hiking, and weekend picnics.",
+        "Surrounded by Lake Thomas, Miller Lake, and Fletcher Lake, Fall River offers endless opportunities for kayaking, boating, swimming, and waterfront relaxation.",
     },
     {
       src: "/nader.jpg",
-      alt: "Family-friendly neighborhood",
-      title: "Top-Rated Schools & Community",
+      alt: "Family enjoying local park in Fall River",
+      title: "Nature Trails & Parks",
       description:
-        "Fall River features excellent schools, French immersion options, and a vibrant community center.",
+        "Enjoy scenic walking trails and nearby provincial parks like Laurie and Oakfield for hiking, picnicking, and peaceful family outings.",
     },
     {
       src: "/nader.jpg",
-      alt: "Large residential property in Fall River",
+      alt: "Children going to school in Fall River",
+      title: "Great Schools & Family Life",
+      description:
+        "Fall River is home to top-rated schools like Lockview High and Ash Lee Jefferson, plus French Immersion options and a safe, quiet atmosphere ideal for families.",
+    },
+    {
+      src: "/nader.jpg",
+      alt: "Suburban home with a large backyard",
       title: "Spacious Lots & Privacy",
       description:
-        "Enjoy large, tree-lined lots and a quiet suburban atmosphere, perfect for families.",
+        "Many homes in Fall River feature large, tree-lined lots offering privacy, peace, and plenty of space for growing families.",
     },
     {
       src: "/nader.jpg",
-      alt: "Highway sign to Halifax",
-      title: "Easy Commute",
+      alt: "Highway connecting to Halifax",
+      title: "Easy Commute & Airport Access",
       description:
-        "Just 20–30 minutes to Halifax or Dartmouth and 15 minutes to the airport with great highway access.",
+        "Located just 20–30 minutes from Halifax and Dartmouth and only 15 minutes from the airport, Fall River offers quick access to major highways and travel routes.",
     },
     {
       src: "/nader.jpg",
-      alt: "Fall River shopping plaza",
-      title: "Essential Amenities Nearby",
+      alt: "Local shops in Fall River",
+      title: "Shops & Daily Essentials",
       description:
-        "Grocery, pharmacy, cafes, fast food, and services—all close to home.",
-    },
-    {
-      src: "/nader.jpg",
-      alt: "Modern house in Fall River",
-      title: "Diverse Housing Options",
-      description:
-        "From lakefront homes to new builds, Fall River offers a wide range of housing types.",
+        "Convenient access to Sobeys, pharmacies, Tim Hortons, local cafes, and nearby shopping in Bedford and Dartmouth Crossing.",
     },
   ];
+  
 
   return (
-    <section className={`w-screen text-black`}>
+    <section className={`w-screen text-black
+    bg-gradient-to-br from-[#cfe3f5] to-[#a5c8eb] pt-6`}>
       <SlidingText
         text="Discover Fall River Benefits"
         styles="text-center mx-auto text-4xl sm:text-5xl md:text-6xl mb-4 text-black"

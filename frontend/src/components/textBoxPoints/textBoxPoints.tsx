@@ -97,7 +97,8 @@ const TextBoxPoints = () => {
             <Image
               src={"/nader.jpg"}
               alt="Nader Omar"
-              className="w-[95vw] max-w-[350px] md:h-[40vh] max-h-[400px] rounded-2xl mx-auto"
+              className="w-[95vw] max-w-[350px] md:h-[40vh] max-h-[400px] rounded-2xl mx-auto
+              mb-auto"
               height={1300}
               width={600}
             />
