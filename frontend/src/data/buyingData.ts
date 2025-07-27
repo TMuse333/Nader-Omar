@@ -53,5 +53,16 @@ export const buyerJourneySteps = [
         "Buying land requires checking zoning, permits, and services like water and septic. New construction involves HST (15%, with potential rebates) and warranties like the Atlantic Home Warranty. Our agents guide you through these complexities.",
     },
   ];
+
+  export const buyingCloser = {
+    imageSrc: "/nader-82.jpg",
+    imageAlt: "Agent Nader Omar",
+    headline: "Ready to Take the Next Step?",
+    paragraph: `
+    Whether you’re just starting to explore or ready to make an offer, I’m here to guide you with confidence, clarity, and care. Let’s start a conversation and create a plan tailored to your goals in Fall River’s dynamic market.
+    `,
+    ctaText: "Lets get in touch",
+  
+  };
   
   

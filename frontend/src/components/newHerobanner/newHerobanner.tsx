@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { TypeWriter, TypeAlongText } from 'focusflow-components';
+"use client"
 
+import Image from "next/image";
+import React from "react";
+import { motion } from "framer-motion";
 
 export interface FullBodyHeroProps {
   bgImage?: string;
@@ -18,7 +18,6 @@ export interface FullBodyHeroProps {
   fullBodyStyles?: string;
   logoStyles?: string;
   typeWriterExamples?: string[];
- 
   bgColor?: string;
 }
 
@@ -30,32 +29,28 @@ const NewHeroBanner = ({
   typeAlongText,
   typeAlongKeywords,
   descriptionText,
-  altTextSkyline = 'background skyline',
-  altTextLogo = 'logo',
-  altTextFullBody = 'Yasser Khalaf portrait',
-  fullBodyStyles = '',
-  logoStyles = '',
-  typeWriterExamples,
+  altTextSkyline = "background skyline",
+  altTextLogo = "logo",
+  altTextFullBody = "Yasser Khalaf portrait",
+  fullBodyStyles = "",
+  logoStyles = "",
 
+  bgColor,
 }: FullBodyHeroProps): React.JSX.Element => {
-  const [startTypeAlong, setStartTypeAlong] = useState(false);
-
-
-  // Trigger animations sequentially
-  const handleTitleComplete = () => {
-    setStartTypeAlong(true);
+  // Function to highlight keywords in typeAlongText
+  const highlightKeywords = (text: string, keywords: string[]) => {
+    let formattedText = text;
+    keywords.forEach((keyword) => {
+      const regex = new RegExp(`\\b${keyword}\\b`, "gi");
+      formattedText = formattedText.replace(regex, `<span class="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">${keyword}</span>`);
+    });
+    return formattedText;
   };
-
-
-  // Animation variants for logo and award
-
 
   return (
     <header
-      className={`w-full min-h-[80vh] md:min-h-screen relative flex items-center justify-center  overflow-hidden z-[3]
-   light-bg2
-      text-black`}
-                        >
+      className={`w-full min-h-[80vh] md:min-h-screen relative flex items-center justify-center overflow-hidden z-[3] light-bg2 text-black ${bgColor || ""}`}
+    >
       {/* Background Image with Gradient Overlay */}
       {bgImage && (
         <div className="absolute inset-0 z-[1]">
@@ -67,40 +62,25 @@ const NewHeroBanner = ({
             height={1080}
             priority
           />
-          <div className="absolute inset-0 t" />
+          <div className="absolute inset-0" />
         </div>
       )}
 
-      <section className="w-full max-w-[1200px] mx-auto px-4 py-12 md:py-0 relative z-[2]
-      text-black">
+      <section className="w-full max-w-[1200px] mx-auto px-4 py-12 md:py-0 relative z-[2] text-black">
         <div className="flex flex-col md:flex-row items-center justify-between">
           {/* Text Content */}
           <div className="flex flex-col items-center md:items-start max-w-[600px] text-center md:text-left">
-            {/* Logo and Award Badges */}
-            <div className="flex space-x-4 mb-6 items-center justify-center
-         mx-auto">
-              <motion.div  initial="initial" animate="animate" whileHover="hover">
+            {/* Logo */}
+            <div className="flex space-x-4 mb-6 items-center justify-center mx-auto">
+              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}>
                 <Image
                   src={logoImage}
                   alt={altTextLogo}
                   width={60}
                   height={60}
-                  className={`object-contain 
-                  w-[15vw] mx-auto
-                  ${logoStyles}`}
+                  className={`object-contain w-[15vw] mx-auto ${logoStyles}`}
                 />
               </motion.div>
-              {/* <motion.div variants={badgeVariants} initial="initial" animate="animate" whileHover="hover">
-                <Image
-                  src={award}
-                  alt="Platinum Award"
-                  width={60}
-                  height={60}
-                  className={`rounded-full object-contain 
-                  w-[15vw]
-                  ${logoStyles}`}
-                />
-              </motion.div> */}
             </div>
 
             {/* Title */}
@@ -108,43 +88,46 @@ const NewHeroBanner = ({
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              onAnimationComplete={handleTitleComplete}
-              className=" md:text-md  font-bold text-black mb-4"
+              className="text-md  font-extrabold leading-tight tracking-tight bg-gradient-to-br from-gray-900 via-blue-600 to-blue-400 bg-clip-text text-transparent mb-4 [text-shadow:0_2px_4px_rgba(0,0,0,0.15)]"
             >
               {titleText}
             </motion.h1>
 
-            {/* TypeAlongText */}
-            <TypeAlongText
-              styles="text-2xl sm:text-3xl md:text-4xl font-semibold  mb-6"
-              text={typeAlongText}
-              keywords={typeAlongKeywords}
-              startAnimation={startTypeAlong}
-
-              highlightColor={"#069e2c"}
+            {/* Highlighted Text (replacing TypeAlongText) */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight mb-6 [text-shadow:0_1px_2px_rgba(0,0,0,0.1)]"
+              dangerouslySetInnerHTML={{ __html: highlightKeywords(typeAlongText, typeAlongKeywords) }}
             />
-
-            {/* TypeWriter (if provided) */}
-            {typeWriterExamples && (
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-black mb-6 px-4 py-2 border border-blue-400 rounded-xl">
-                <TypeWriter examples={typeWriterExamples} />
-              </h3>
-            )}
 
             {/* Description */}
             <motion.p
-              className="text-lg sm:text-xl md:text-lg text-black max-w-[500px]"
-         
-              
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-md sm:text-lg md:text-xl leading-relaxed font-medium text-gray-800 max-w-[500px] [text-shadow:0_1px_2px_rgba(0,0,0,0.1)]"
             >
-                    {descriptionText}
-                    <br/>
-                    <button className='bg-blue-100 rounded-2xl p-2 mr-2 mt-4'>
-                        Contact
-                    </button>
-                    <button className='bg-blue-100 rounded-2xl p-2 mt-4'>
-                        Call now
-                    </button>
+              {descriptionText}
+              <br />
+              <button 
+               onClick={() => {
+                const el = document.getElementById("contact");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="bg-blue-200 rounded-2xl p-2 mt-4 border mr-2 border-blue-400 border-2">
+                <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent [text-shadow:0_1px_2px_rgba(0,0,0,0.1)]">
+                  Contact
+                </span>
+              </button>
+              <button className="bg-blue-200 rounded-2xl p-2 mt-4 border border-blue-400 border-2">
+                <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent [text-shadow:0_1px_2px_rgba(0,0,0,0.1)]">
+                  Call now
+                </span>
+              </button>
             </motion.p>
           </div>
 
@@ -152,7 +135,7 @@ const NewHeroBanner = ({
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, type: 'spring', stiffness: 80, damping: 15 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 80, damping: 15 }}
             className="mt-12 md:mt-0 md:w-[40vw] max-w-[500px]"
           >
             <Image
@@ -161,8 +144,7 @@ const NewHeroBanner = ({
               width={500}
               height={700}
               priority
-              className={`w-full h-auto object-contain rounded-2xl shadow-2xl
-              border border-blue-300 bg-gray-300 transform md:-rotate-3 ${fullBodyStyles}`}
+              className={`w-full h-auto object-contain rounded-full shadow-2xl border border-blue-300 bg-gray-300 transform md:-rotate-3 ${fullBodyStyles}`}
             />
           </motion.div>
         </div>

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 import Link from "next/link";
 
 interface NavbarProps {
-  excludedLink: "Home" | "buy-home-fall-river"
+  excludedLink: "Home" | "Process";
 }
 
 const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
@@ -23,13 +23,18 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
     });
   }, []);
 
-
-
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Process", href: "/buy-home-fall-river" },
-    // { name: "Contact", href: "/contact-agent" },
   ].filter((item) => item.name !== excludedLink);
+
+  const scrollToContact = () => {
+    const section = document.getElementById("contact");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false);
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -41,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
       className="fixed top-0 left-0 right-0 z-50 bg-blue-100/10 backdrop-blur-md"
     >
       <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo or Brand */}
+        {/* Logo */}
         <Link href="/">
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -64,6 +69,15 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
               </motion.div>
             </Link>
           ))}
+          {/* Contact scroll link for desktop */}
+          <motion.div
+            onClick={scrollToContact}
+            whileHover={{ scale: 1.1, color: color.get() }}
+            whileTap={{ scale: 0.95 }}
+            className="text-gray-900 font-medium hover:text-blue-600 transition-colors cursor-pointer"
+          >
+            Contact
+          </motion.div>
         </div>
 
         {/* Mobile Burger Button */}
@@ -111,6 +125,16 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
               </motion.div>
             </Link>
           ))}
+          {/* Contact scroll link for mobile */}
+          <motion.div
+            onClick={scrollToContact}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
+            className="py-2 text-gray-900 font-medium hover:text-blue-600 transition-colors cursor-pointer"
+          >
+            Contact
+          </motion.div>
         </div>
       </motion.div>
     </motion.nav>

@@ -66,7 +66,7 @@ export const heroData = {
     titleBgColor: "bg-transparent",
     descriptionBgColor: "bg-transparent",
     descriptionTextColor: "text-gray-800",
-    textColor: "text-black",
+    textColor: "text-black", // now required and present
     objectContain: false,
     listAspects: [
       {
@@ -86,6 +86,7 @@ export const heroData = {
       },
     ],
   };
+  
   
 
 
@@ -121,12 +122,13 @@ export const heroData = {
     logoImage: '/remax-ballon.webp',
   
     titleText: 'Helping You Buy Your Dream Home in Fall River, Waverley & Wellington, Nova Scotia',
-    typeAlongText: 'Confidently Navigate Fall River’s Real Estate Market — Backed by Data, Guided by Care',
+    typeAlongText: 'Confidently Navigate Fall Rivers Real Estate Market. Backed by Data, Guided by Care',
     typeAlongKeywords: [
-      'fall', 'river', 'buy', 'home', 'real estate'
+      'Fall', "Rivers", 'buy', 'home', 'Real Estate','Data','Care'
     ],
     descriptionText:
-      "Fall River’s peaceful community and scenic lifestyle are waiting for you. With 15+ years of experience, I use data-driven insights and local knowledge to help buyers find the perfect home, simplifying your journey with clear guidance and personal support.",
+    "Hi, I’m Nader Omar, a RE/MAX Nova agent based in Fall River. This peaceful community and scenic lifestyle are waiting for you. With 15+ years of experience, I use data-driven insights and local knowledge to help buyers find the perfect home, simplifying your journey with clear guidance and personal support.",
+  
   
     // bgImage: '/skyline-fall-river.jpg',
     altTextSkyline: 'A scenic aerial view of Fall River, Nova Scotia with surrounding lakes and trees',
@@ -259,4 +261,18 @@ export const heroData = {
     buttonText: "Start Your Journey",
     destination: "/contact"
   };
+
+
+
+export const contactCloserData = {
+  imageSrc: "/nader-82.jpg",
+  imageAlt: "Agent Nader Omar",
+  headline: "Ready to make your Fall River real estate dreams a reality?",
+  paragraph: `
+Whether you're looking to buy your perfect home or sell your property for the best possible value, you deserve an agent who combines expert market knowledge with genuine, unwavering care. I'm dedicated to providing a real estate experience that's data-driven for smart decisions and emotionally supportive every step of the way. Don't navigate the Fall River market alone. Let's start a conversation about your goals today.
+  `,
+  ctaText: "Let's get in touch",
+
+};
+
   

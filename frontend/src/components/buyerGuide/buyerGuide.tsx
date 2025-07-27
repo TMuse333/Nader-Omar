@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect } from "react";
 import {
@@ -7,7 +7,8 @@ import {
   motion,
   animate,
 } from "framer-motion";
-import Link from "next/link";
+import agent from '../../../public/nader-22.jpg';  // your image import
+import Image from "next/image";
 
 const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
 
@@ -25,85 +26,111 @@ const HomeBuyingGuide = () => {
 
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
-  // const backgroundImage = useMotionTemplate`linear-gradient(to bottom, #f0f9ff, #ffffff)`;
 
   return (
     <motion.section
-    //  
-
       className="relative px-4 py-24 text-gray-900
-  bg-gradient-to-b from-blue-200 to-white
-      "
+        bg-gradient-to-b from-blue-200 to-white"
     >
-      <div className="mx-auto max-w-5xl">
-        <motion.h2
+      <div className="mx-auto max-w-5xl flex flex-col md:flex-row items-center gap-12">
+        {/* Left side: header + paragraph */}
+        <motion.div className="md:w-1/2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8 bg-gradient-to-br from-gray-900 to-blue-600 bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-4xl md:text-5xl"
         >
-          Why Choose Us for Your Homeownership Journey
-        </motion.h2>
-        <motion.p
+          <motion.h2
+            className="mb-8 bg-gradient-to-br from-gray-900 to-blue-600 bg-clip-text text-center md:text-left text-3xl font-medium leading-tight text-transparent sm:text-4xl md:text-5xl"
+          >
+            Why Choose Me as Your Real Estate Agent
+          </motion.h2>
+          <motion.p
+            className="mb-12 max-w-lg mx-auto md:mx-0 text-center md:text-left text-base leading-relaxed text-gray-700 md:text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Buying or selling a home is more than just a transaction — it’s a
+            significant life event that requires strategic expertise and genuine
+            understanding. I combine data-driven insights with compassionate
+            support to guide you confidently through every step of your journey.
+          </motion.p>
+        </motion.div>
+
+        {/* Right side: image */}
+        <motion.div
+          className="md:w-1/2 max-w-sm rounded-lg overflow-hidden shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-12 max-w-2xl mx-auto text-center text-base leading-relaxed text-gray-700 md:text-lg"
         >
-          Buying a home in Fall River is more than a transaction—it’s a life-changing milestone. Our RE/MAX agents are your trusted partners, combining deep market expertise with genuine care to guide you every step of the way. With years of experience in Fall River’s fast-moving market (homes often sell in under 30 days), we’re here to make your journey seamless, informed, and exciting.
-        </motion.p>
-        <div className="grid gap-8 md:grid-cols-3">
-          {[
-            {
-              title: "Personalized Guidance",
-              description:
-                "Your dreams matter. We start by understanding your unique goals—family needs, lifestyle, and what draws you to Fall River. From there, we tailor every step, connecting you with trusted mortgage experts to secure pre-approval and set a clear budget.",
-            },
-            {
-              title: "Expert Market Insight",
-              description:
-                "With Fall River’s average home price around $930,900 (May 2025), our agents provide data-driven insights on pricing, competition, and trends. We’ll ensure you’re confident and prepared, with no surprises.",
-            },
-            {
-              title: "Dedicated Support",
-              description:
-                "From touring homes to crafting winning offers and closing the deal, we’re by your side. Our commitment doesn’t end at closing—we’re here for ongoing support, from recommending local services to answering future questions.",
-            },
-          ].map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
-              className="flex flex-col items-center text-center"
-            >
-              <div className="mb-4 rounded-full bg-blue-200/50 px-4 py-2 text-sm font-medium text-gray-900">
-                {step.title}
-              </div>
-              <p className="text-base leading-relaxed text-gray-700">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-12 text-center"
-        >
-          <Link href="/contact-agent">
-            <motion.button
-              style={{ border, boxShadow }}
-              whileHover={{ scale: 1.015 }}
-              whileTap={{ scale: 0.985 }}
-              className="group relative flex w-fit mx-auto items-center gap-1.5 rounded-full bg-blue-200/30 px-6 py-3 text-gray-900 transition-colors hover:bg-blue-200/50"
-            >
-              Connect with Your Agent
-            </motion.button>
-          </Link>
+          <Image
+            src={agent}
+            alt="Agent Nader Omar"
+            className="w-full h-auto object-cover rounded-lg"
+            priority
+          />
         </motion.div>
       </div>
+
+      {/* 3 points / aspects below */}
+      <div className="mt-16 grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+        {[
+          {
+            title: "Precision Through Data",
+            description:
+              "I use the latest Fall River market data, absorption rates, and hyper-local trends to price properties strategically and identify homes with strong appreciation potential. Every decision is backed by solid market evidence, not guesswork.",
+          },
+          {
+            title: "Strategic Marketing & Negotiations",
+            description:
+              "My data analysis allows me to showcase your property effectively to qualified buyers or find homes that truly match your criteria. When negotiating, I provide clear market stats so we can secure the best price and terms confidently.",
+          },
+          {
+            title: "Empathy & Ongoing Advocacy",
+            description:
+              "I start by listening to your goals and concerns to tailor my guidance personally. I keep you informed with transparent communication and calmly solve any unexpected challenges. My support continues beyond closing, offering you a trusted resource in your Fall River community.",
+          },
+        ].map((step, index) => (
+          <motion.div
+            key={index}
+            className="flex flex-col items-center text-center px-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
+          >
+            <div className="mb-4 rounded-full bg-blue-200/50 px-4 py-2 text-sm font-medium text-gray-900">
+              {step.title}
+            </div>
+            <p className="text-base leading-relaxed text-gray-700">
+              {step.description}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Button scroll to #contact */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+        className="mt-12 text-center"
+      >
+        <motion.button
+          onClick={() => {
+            const el = document.getElementById("contact");
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          style={{ border, boxShadow }}
+          whileHover={{ scale: 1.015 }}
+          whileTap={{ scale: 0.985 }}
+          className="group relative flex w-fit mx-auto items-center gap-1.5 rounded-full bg-blue-200/30 px-6 py-3 text-gray-900 transition-colors hover:bg-blue-200/50"
+        >
+          Let&apos;s find your dream home
+        </motion.button>
+      </motion.div>
     </motion.section>
   );
 };
