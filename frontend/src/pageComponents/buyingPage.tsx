@@ -14,6 +14,7 @@ import Navbar from "@/components/navbar/navbar";
 import ContactCloser from "@/components/contactForm/contactForm";
 import NaderBanner from "@/components/naderBanner/naderBanner";
 import Footer from "@/components/footer/footer";
+import InteractiveMap from "@/components/map/map";
 
 
 
@@ -32,6 +33,7 @@ const BuyingPage = () => {
                 />
                 <AuroraHero/>
                 <HomeBuyingGuide/>
+                <InteractiveMap/>
                 <ScrollCarousel/>
                 <Accordion
                 hasIntro={true}
