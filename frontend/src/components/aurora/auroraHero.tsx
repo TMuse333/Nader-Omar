@@ -9,7 +9,8 @@ import {
 } from "framer-motion";
 
 import agent from '../../../public/nader.jpg';
-
+import logo from '../../../public/remax-nova-flag.webp'
+import Image from "next/image";
 const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
 
 const AuroraHero = () => {
@@ -43,10 +44,21 @@ const AuroraHero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full md:w-1/2 flex justify-center"
+          className="w-full md:w-1/2 flex flex-col items-center justify-center"
         >
+            <Image
+          width={600}
+          height={1300}
+          src={logo}
+          alt="remax nova logo"
+          className="w-[120px] scale-[2] mb-4 rounded-x  object-contain"
+          />
           <div className="h-48 w-48 md:h-96 md:w-96 rounded-full overflow-hidden border-4 border-blue-200 shadow-xl">
-            <img
+            
+            <Image
+            priority
+            width={600}
+            height={1300}
               src={agent.src}
               alt="Agent Nader Omar"
               className="h-full w-full object-cover"
@@ -54,6 +66,7 @@ const AuroraHero = () => {
           </div>
         </motion.div>
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+        
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

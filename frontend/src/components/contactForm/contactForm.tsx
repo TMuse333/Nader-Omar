@@ -81,7 +81,7 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
     {
       name: "extras",
       type: "textarea",
-      placeholder: "Let us know any extra details and your situation",
+      placeholder: "Let us know any extra details about your situation.",
       required: true,
     },
   ];

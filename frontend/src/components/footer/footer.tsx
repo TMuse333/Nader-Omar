@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import logo from '../../../public/remax-nova-flag.webp'
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   const navItems = [
@@ -12,12 +14,19 @@ const Footer: React.FC = () => {
     <footer className="w-full bg-[#0e0e0e] text-gray-200 border-t border-gray-700">
       <div className="max-w-[1200px] mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Brand */}
-        <div>
+        <div className="flex flex-col-reverse">
           <Link href="/" className="flex flex-col items-center md:items-start">
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white mt-4">
               Nader Omar | RE/MAX
             </span>
           </Link>
+          <Image
+          src={logo}
+          alt="remax nova logo"
+          width={600}
+          height={1300}
+          className='w-[100px] mb-8  scale-[1.5] rounded-md mt-4 mx-auto bg-white object-cover'
+          />
         </div>
 
         {/* Contact Info */}

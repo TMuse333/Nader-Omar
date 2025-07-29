@@ -76,9 +76,9 @@ const NewHeroBanner = ({
                 <Image
                   src={logoImage}
                   alt={altTextLogo}
-                  width={60}
-                  height={60}
-                  className={`object-contain w-[15vw] mx-auto ${logoStyles}`}
+                  width={600}
+                  height={1300}
+                  className={`object-contain w-[40vw]  sm:max-w-[125px] scale-[3] p-3 mx-auto ${logoStyles}`}
                 />
               </motion.div>
             </div>

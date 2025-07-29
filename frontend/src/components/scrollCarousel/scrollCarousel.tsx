@@ -1,17 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react";
-import {
-  motion,
-//   useMotionTemplate,
-  useMotionValue,
-  useScroll,
-  useTransform,
-  animate,
-} from "framer-motion";
-
-
-const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
+import { useRef, useState } from "react";
 
 interface Step {
   number: number;
@@ -59,36 +48,37 @@ const buyerJourneySteps: Step[] = [
 ];
 
 const ScrollCarousel = () => {
-  const color = useMotionValue(COLORS_TOP[0]);
-  const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+  const checkScrollPosition = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
 
-  useEffect(() => {
-    animate(color, COLORS_TOP, {
-      ease: "easeInOut",
-      duration: 10,
-      repeat: Infinity,
-      repeatType: "mirror",
-    });
-  }, []);
-
-//   const border = useMotionTemplate`1px solid ${color}`;
-//   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
+  const scrollTo = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.clientWidth * 0.9;
+      const newScrollPosition =
+        direction === "left"
+          ? carouselRef.current.scrollLeft - scrollAmount
+          : carouselRef.current.scrollLeft + scrollAmount;
+      carouselRef.current.scrollTo({
+        left: newScrollPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const StepCard = ({ step }: { step: Step }) => (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="relative w-[95vw] max-w-[600px] h-[600px] bg-blue-50 rounded-lg flex flex-col items-center justify-center p-8 shadow-lg"
-    >
+    <div className="relative w-[95vw] max-w-[600px] h-[600px] bg-blue-50 rounded-lg flex flex-col items-center justify-center p-8 shadow-lg flex-shrink-0">
       <div className="relative w-[100px] h-[100px] flex items-center justify-center mb-6">
         <svg width="100" height="100" viewBox="0 0 100 100">
-          <motion.circle
+          <circle
             cx="50"
             cy="50"
             r="45"
@@ -96,9 +86,6 @@ const ScrollCarousel = () => {
             strokeWidth="4"
             fill="none"
             strokeDasharray="282.6"
-            initial={{ strokeDashoffset: 282.6 }}
-            whileInView={{ strokeDashoffset: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-900">
@@ -111,95 +98,78 @@ const ScrollCarousel = () => {
       <p className="text-base text-left text-gray-700 leading-relaxed">
         {step.description}
       </p>
-    </motion.div>
+    </div>
   );
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="bg-blue-100 py-24"
-    >
+    <section className="bg-blue-100 py-24">
       <div className="mx-auto max-w-5xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8 bg-gradient-to-br from-gray-900 to-blue-600 bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-4xl md:text-5xl"
-        >
+        <h2 className="mb-8 bg-gradient-to-br from-gray-900 to-blue-600 bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-4xl md:text-5xl">
           Your Path to Homeownership in Fall River
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-12 max-w-2xl mx-auto text-center text-base leading-relaxed text-gray-700 md:text-lg"
-        >
+        </h2>
+        <p className="mb-12 max-w-2xl mx-auto text-center text-base leading-relaxed text-gray-700 md:text-lg">
           Buying a home in Fall River, Nova Scotia, is a journey we’ll navigate together. Our detailed process ensures you’re informed, confident, and excited every step of the way.
-        </motion.p>
+        </p>
         <div className="flex h-24 items-center justify-center">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="font-semibold uppercase text-gray-600"
-          >
-            Scroll to explore
-          </motion.span>
+          <span className="font-semibold uppercase text-gray-600">
+            Scroll or use arrows to explore
+          </span>
         </div>
-        <section ref={targetRef} className="relative h-[300vh]">
-          <div className="sticky top-0 flex h-screen items-center overflow-hidden bg-blue-100">
-            <motion.div style={{ x }} className="flex gap-4">
-              {buyerJourneySteps.map((step, index) => (
-                <StepCard key={index} step={step} />
-              ))}
-            </motion.div>
+        <div className="relative">
+          <div
+            ref={carouselRef}
+            onScroll={checkScrollPosition}
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pb-4"
+          >
+            {buyerJourneySteps.map((step, index) => (
+              <StepCard key={index} step={step} />
+            ))}
           </div>
-        </section>
-        {/* <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: 0.5 }}
-          transition={{ duration: 0.8 }}
-          className="w-full bg-blue-50 p-8 rounded-lg flex flex-col items-center my-12 mx-auto max-w-4xl shadow-lg"
-        >
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl font-bold mb-4 text-gray-900"
+          <button
+            onClick={() => scrollTo("left")}
+            disabled={!canScrollLeft}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 bg-blue-200/30 p-3 rounded-full text-gray-900 ${
+              canScrollLeft ? "opacity-100 hover:bg-blue-200/50" : "opacity-50 cursor-not-allowed"
+            } transition-opacity`}
           >
-            Ready to Start Your Journey?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: -50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg max-w-xl text-center text-gray-700"
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={() => scrollTo("right")}
+            disabled={!canScrollRight}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 bg-blue-200/30 p-3 rounded-full text-gray-900 ${
+              canScrollRight ? "opacity-100 hover:bg-blue-200/50" : "opacity-50 cursor-not-allowed"
+            } transition-opacity`}
           >
-            Our RE/MAX agents are here to guide you through every step of buying your dream home in Fall River. Connect with us today to begin!
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-6"
-          >
-            <Link href="/contact-agent">
-              <motion.button
-                style={{ border, boxShadow }}
-                whileHover={{ scale: 1.015 }}
-                whileTap={{ scale: 0.985 }}
-                className="group relative flex w-fit items-center gap-1.5 rounded-full bg-blue-200/30 px-6 py-3 text-gray-900 transition-colors hover:bg-blue-200/50"
-              >
-                Contact an Agent
-              </motion.button>
-            </Link>
-          </motion.div>
-        </motion.div> */}
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

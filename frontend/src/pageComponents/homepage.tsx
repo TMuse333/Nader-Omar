@@ -1,10 +1,8 @@
-"use client"
+"use client";
 
-// import CarouselHero from "@/components/tempHero/hero";
-
-import {   contactCloserData, newHeroData } from "@/data/data";
+import { contactCloserData, newHeroData } from "@/data/data";
 import React from "react";
-
+import Head from "next/head";
 
 import NewHeroBanner from "@/components/newHerobanner/newHerobanner";
 import Footer from "@/components/footer/footer";
@@ -12,79 +10,70 @@ import FeatureBoxes from "@/components/featureBoxes/featureBoxes";
 import Navbar from "@/components/navbar/navbar";
 import IntroCard from "@/components/intoCard/introCard";
 import TextAndList from "@/components/textAndList/textAndList";
-// import ChatBox from "@/chatbotFiles/chatbot/chatbot";
 import ContactCloser from "@/components/contactForm/contactForm";
 import ProcessPreview from "@/components/processPreview/processPreview";
 import NaderBanner from "@/components/naderBanner/naderBanner";
 
 const Homepage = () => {
+  return (
+    <>
+      <Head>
+        <title>Omar Nader | Real Estate Agent Halifax & Fall River, Nova Scotia</title>
+        <meta
+          name="description"
+          content="Omar Nader is your trusted real estate agent serving Halifax and Fall River. Expert guidance for buying and selling homes with personalized service and local knowledge."
+        />
+        <meta
+          name="keywords"
+          content="Omar Nader, real estate agent Halifax, Fall River real estate, Halifax homes for sale, buy home Fall River, sell home Halifax, Nova Scotia realtor"
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.naderomarrealestate.ca/" />
 
+        {/* Open Graph */}
+        <meta property="og:title" content="Omar Nader | Real Estate Agent Halifax & Fall River, Nova Scotia" />
+        <meta
+          property="og:description"
+          content="Expert real estate services by Omar Nader for buyers and sellers in Halifax and Fall River. Personalized support and local market expertise."
+        />
+        <meta property="og:url" content="https://www.naderomarrealestate.ca/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="Omar Nader Real Estate" />
+        <meta
+          property="og:image"
+          content="https://www.naderomarrealestate.ca/nader.png"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Omar Nader | Real Estate Agent Halifax Nova Scotia" />
 
-    return (
-        <main className="w-screen bg-blue-100
-        space-y-6">
-          <Navbar
-          excludedLink="Home"
-          />
-            {/* <CarouselHero
-            {...heroData}
-            /> */}
-            <NewHeroBanner
-            {...newHeroData}
-            />
-            {/* <TextBoxPoints/> */}
-            <IntroCard/>
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Omar Nader | Real Estate Agent Halifax and Fall River, Nova Scotia" />
+        <meta
+          name="twitter:description"
+          content="Expert real estate services by Omar Nader for buyers and sellers in Halifax and Fall River."
+        />
+        <meta name="twitter:image" content="https://www.naderomarrealestate.ca/nader.png" />
 
- 
-            {/* <InteractiveMap/> */}
-            {/* <h2 className="text-center text-3xl  sm:text-4xl md:text-5xl font-semibold text-black mb-2">
-  Discover Fall River
-</h2> */}
-{/* <p className="text-sm sm:text-base md:text-lg text-black mb-6
-px-4 max-w-[1200px]">
-  Fall River, Nova Scotia blends scenic lakeside living with excellent schools, family-friendly amenities, and a convenient commute to Halifax.
-  Here&apos;s why it&apos;s one of HRM&apos;s most desirable communities.
-</p> */}
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-            {/* <Carousel
-            {...aboutFallRiver}
-            /> */}
-          <FeatureBoxes
-         
-          />
+      <main className="w-screen bg-blue-100 space-y-6 overflow-x-hidden">
+        <Navbar excludedLink="Home" />
+        <NewHeroBanner {...newHeroData} />
+        <IntroCard />
+        <FeatureBoxes />
+        <TextAndList />
+        <ProcessPreview />
+        <NaderBanner />
+        <ContactCloser {...contactCloserData} />
+        <Footer />
+      </main>
+    </>
+  );
+};
 
-
-          
-                        {/* <h2 className="text-center text-3xl  sm:text-4xl md:text-5xl font-semibold text-black mb-2">
-  Discover Fall River
-</h2> */}
-
-{/* <ChatBox/> */}
-<TextAndList
-         
-            />
-
-            <ProcessPreview/>
-            {/* <CarouselGrid
-            {...areaImages}
-            /> */}
-          
-
-
-{/* <BlogCloser
-  header="Let’s Find Your Perfect Home Together"
-  description={`Whether you're buying your first home, upgrading to your dream space, or looking for a smart investment, I'm here to guide you every step of the way. 
-
-Reach out today and let’s make your real estate goals a reality.`}
-/> */}
-<NaderBanner/>
-<ContactCloser
-{...contactCloserData}
-/>
-
-<Footer/>
-        </main>
-    )
-}
-
-export default Homepage
+export default Homepage;
