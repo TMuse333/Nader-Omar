@@ -5,10 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: '', // This means no pages are restricted.
+        disallow: '/', // Disallow everything
       },
     ],
-    sitemap: 'https://www.naderomarrealestate.ca/sitemap.xml',
+    sitemap: '', // Optionally remove sitemap reference during dev
   }
 }
