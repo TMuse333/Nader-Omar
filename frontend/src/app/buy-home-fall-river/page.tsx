@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     title: "Buy a Home in Fall River | Nader Omar Real Estate",
     description:
       "Explore homes for sale in Fall River, NS with trusted real estate agent Nader Omar. Get expert guidance and personalized service.",
-    url: "https://www.nader-omar.ca/buy-home-fall-river",
+    url: "https://naderomarrealtor.com/buy-home-fall-river",
     images: [
       {
-        url: "https://www.nader-omar.ca/nader.png",
+        url: "https://naderomarrealtor.com/nader.png",
         width: 1200,
         height: 630,
         alt: "Buy a Home in Fall River | Nader Omar Real Estate"

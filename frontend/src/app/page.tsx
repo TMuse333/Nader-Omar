@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     title: "Nader Omar | Real Estate Agent Fall River Nova Scotia",
     description:
       "Nader Omar is a trusted Remax Nova real estate agent in Fall River, Nova Scotia, helping clients find the perfect home with expert guidance.",
-    url: "https://www.nader-omar.ca",
+    url: "https://naderomarrealtor.com",
     images: [
       {
-        url: "https://www.nader-omar.ca/nader.png",
+        url: "https://naderomarrealtor.com/nader.png",
         width: 1200,
         height: 630,
         alt: "Nader Omar | Remax Nova Real Estate Agent Fall River Nova Scotia"

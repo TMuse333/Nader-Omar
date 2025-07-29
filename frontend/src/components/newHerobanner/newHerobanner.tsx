@@ -31,7 +31,7 @@ const NewHeroBanner = ({
   descriptionText,
   altTextSkyline = "background skyline",
   altTextLogo = "logo",
-  altTextFullBody = "Yasser Khalaf portrait",
+  altTextFullBody = "Nader Omar portrait",
   fullBodyStyles = "",
   logoStyles = "",
 

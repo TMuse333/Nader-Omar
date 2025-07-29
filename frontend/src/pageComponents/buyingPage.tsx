@@ -27,11 +27,11 @@ const BuyingPage = () => {
             <Head>
   <title>Top Realtor in Fall River | Buy Your Home with Nader</title>
   <meta name="description" content="Looking to buy a home in Fall River, Nova Scotia? Discover listings, schools, lifestyle info, and expert guidance from local realtor Nader." />
-  <link rel="canonical" href="https://www.naderrealtor.ca/buy-home-fall-river" />
+  <link rel="canonical" href="https://naderomarrealtor.com/buy-home-fall-river" />
   
   {/* Open Graph / Facebook */}
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.naderrealtor.ca/buy-home-fall-river" />
+  <meta property="og:url" content="https://naderomarrealtor.com/buy-home-fall-river" />
   <meta property="og:title" content="Top Realtor in Fall River | Buy Your Home with Nader" />
   <meta property="og:description" content="Looking to buy a home in Fall River, Nova Scotia? Discover listings, schools, lifestyle info, and expert guidance from local realtor Nader." />
   <meta property="og:image" content="/images/fallriver-area.webp" />
@@ -53,8 +53,8 @@ const BuyingPage = () => {
         "@context": "https://schema.org",
         "@type": "RealEstateAgent",
         "name": "Nader - Fall River Realtor",
-        "url": "https://www.naderrealtor.ca",
-        "image": "https://www.naderrealtor.ca/images/fallriver-area.webp",
+        "url": "naderomarrealtor.com",
+        "image": "naderomarrealtor.com/nader.png",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Fall River",

@@ -18,7 +18,7 @@ const Homepage = () => {
   return (
     <>
       <Head>
-        <title>Omar Nader | Real Estate Agent Halifax & Fall River, Nova Scotia</title>
+        <title>Omar Nader | Real Estate Agent Halifax and Fall River, Nova Scotia</title>
         <meta
           name="description"
           content="Omar Nader is your trusted real estate agent serving Halifax and Fall River. Expert guidance for buying and selling homes with personalized service and local knowledge."
@@ -28,21 +28,21 @@ const Homepage = () => {
           content="Omar Nader, real estate agent Halifax, Fall River real estate, Halifax homes for sale, buy home Fall River, sell home Halifax, Nova Scotia realtor"
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.naderomarrealestate.ca/" />
+        <link rel="canonical" href="https://naderomarrealtor.com/" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Omar Nader | Real Estate Agent Halifax & Fall River, Nova Scotia" />
+        <meta property="og:title" content="Omar Nader | Real Estate Agent Halifax and Fall River, Nova Scotia" />
         <meta
           property="og:description"
           content="Expert real estate services by Omar Nader for buyers and sellers in Halifax and Fall River. Personalized support and local market expertise."
         />
-        <meta property="og:url" content="https://www.naderomarrealestate.ca/" />
+        <meta property="og:url" content="https://naderomarrealtor.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:site_name" content="Omar Nader Real Estate" />
         <meta
           property="og:image"
-          content="https://www.naderomarrealestate.ca/nader.png"
+          content="https://naderomarrealtor.com/nader.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

@@ -119,7 +119,7 @@ export const heroData = {
 
   export const newHeroData: FullBodyHeroProps = {
     fullBodyImage: '/nader.jpg',
-    logoImage: '/remax-nova.webp',
+    logoImage: '/remax-nova-flag.webp',
   
     titleText: 'Helping You Buy Your Dream Home in Fall River, Waverley & Wellington, Nova Scotia',
     typeAlongText: 'Confidently Navigate Fall Rivers Real Estate Market. Backed by Data, Guided by Care',
