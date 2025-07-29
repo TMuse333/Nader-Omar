@@ -115,7 +115,7 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("https://www.focusflowsoftware.com/api/sendEmail", formData);
+      await axios.post("https://www.naderomarrealtor.com/api/sendEmail", formData);
       setSuccess("Form submitted successfully!");
       setFormData(questions.reduce((acc, q) => ({ ...acc, [q.name]: "" }), {}));
       setError(null);
