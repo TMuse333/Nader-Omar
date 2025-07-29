@@ -123,11 +123,15 @@ const NewHeroBanner = ({
                   Contact
                 </span>
               </button>
-              <button className="bg-blue-200 rounded-2xl p-2 mt-4 border border-blue-400 border-2">
-                <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent [text-shadow:0_1px_2px_rgba(0,0,0,0.1)]">
-                  Call now
-                </span>
-              </button>
+              
+              <a href="tel:+17823213393">
+  <button className="bg-blue-200 rounded-2xl p-2 mt-4 border border-blue-400 border-2">
+    <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent [text-shadow:0_1px_2px_rgba(0,0,0,0.1)]">
+      Call now
+    </span>
+  </button>
+</a>
+
             </motion.p>
           </div>
 
