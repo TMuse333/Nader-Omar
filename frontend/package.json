@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "axios": "^1.11.0",
     "focusflow-components": "^1.0.100",
     "framer-motion": "^12.23.0",
