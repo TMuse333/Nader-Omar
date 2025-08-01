@@ -13,7 +13,7 @@ import TextAndList from "@/components/textAndList/textAndList";
 import ContactCloser from "@/components/contactForm/contactForm";
 import ProcessPreview from "@/components/processPreview/processPreview";
 import NaderBanner from "@/components/naderBanner/naderBanner";
-import MapSection from "@/components/mapSection/mapSection";
+// import MapSection from "@/components/mapSection/mapSection";
 
 const Homepage = () => {
   return (
@@ -69,7 +69,7 @@ const Homepage = () => {
         <FeatureBoxes />
         <TextAndList />
         <ProcessPreview />
-        <MapSection/>
+        {/* <MapSection/> */}
         <NaderBanner />
         <ContactCloser {...contactCloserData} />
         <Footer />
