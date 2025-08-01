@@ -22,7 +22,7 @@ const MapSection = (): React.JSX.Element => {
 
   return (
     <section className="bg-blue-50 relative py-12">
-      <div className="absolute inset-0 z-[-10]" style={{ background }} />
+      <motion.div className="absolute inset-0 z-[-10]" style={{ background }} />
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
