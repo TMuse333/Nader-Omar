@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import logo from '../../../public/remax-nova-flag.webp'
 import Image from "next/image";
+import { FacebookLogo, InstagramLogo, LinkedinLogo } from "phosphor-react";
 
 const Footer: React.FC = () => {
   const navItems = [
@@ -10,9 +10,20 @@ const Footer: React.FC = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const socialLinks: {
+    name: string;
+    href: string;
+    icon: React.ElementType;
+  }[] = [
+    { name: "Facebook", href: "https://facebook.com/yourprofile", icon: FacebookLogo },
+    { name: "Instagram", href: "https://instagram.com/yourprofile", icon: InstagramLogo },
+    { name: "LinkedIn", href: "https://linkedin.com/in/yourprofile", icon: LinkedinLogo },
+  ];
+
   return (
     <footer className="w-full bg-[#0e0e0e] text-gray-200 border-t border-gray-700">
       <div className="max-w-[1200px] mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        
         {/* Brand */}
         <div className="flex flex-col-reverse">
           <Link href="/" className="flex flex-col items-center md:items-start">
@@ -21,11 +32,11 @@ const Footer: React.FC = () => {
             </span>
           </Link>
           <Image
-          src={logo}
-          alt="remax nova logo"
-          width={600}
-          height={1300}
-          className='w-[100px] mb-8  scale-[1.5] rounded-md mt-4 mx-auto bg-white object-cover'
+            src="/remax-nova-flag.webp"
+            alt="remax nova logo"
+            width={600}
+            height={1300}
+            className="w-[100px] mb-8 scale-[1.5] rounded-md mt-4 mx-auto bg-white object-cover"
           />
         </div>
 
@@ -38,7 +49,10 @@ const Footer: React.FC = () => {
             32 Akerley Blvd, Dartmouth, NS B3B 1N1
           </p>
           <p className="text-sm sm:text-base md:text-lg mb-2">
-            <a href="tel:+17823213393" className="hover:text-[#00bfff] transition-colors">
+            <a
+              href="tel:+17823213393"
+              className="hover:text-[#00bfff] transition-colors"
+            >
               (782)-321-3393
             </a>
           </p>
@@ -56,6 +70,22 @@ const Footer: React.FC = () => {
           >
             Get in Touch
           </a>
+
+          {/* Social Icons */}
+          <div className="flex gap-4 mt-6">
+            {socialLinks.map(({ name, href, icon: Icon }) => (
+              <a
+                key={name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#00bfff] text-white transition-colors"
+              >
+                <Icon size={18} weight="fill" />
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Navigation */}

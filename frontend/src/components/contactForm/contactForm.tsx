@@ -10,6 +10,7 @@ import {
   Variants,
 } from "framer-motion";
 import axios from "axios";
+import { FacebookLogo, InstagramLogo, LinkedinLogo } from "phosphor-react";
 
 const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
 
@@ -36,7 +37,7 @@ interface ContactCloserProps {
   imageAlt: string;
   headline: string;
   paragraph: string;
-  ctaText:string
+  ctaText: string;
 }
 
 const ContactCloser: React.FC<ContactCloserProps> = ({
@@ -44,7 +45,7 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
   imageAlt,
   headline,
   paragraph,
-  ctaText
+  ctaText,
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
@@ -86,12 +87,32 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
     },
   ];
 
+  const socialLinks = [
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/p/Nader-Omar-Remax-Nova-61566969102547/",
+      icon: FacebookLogo,
+      color: "bg-[#1877F2]", // Facebook official blue
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/nader_omar_realtor/",
+      icon: InstagramLogo,
+      gradient: "from-[#833AB4] via-[#FD1D1D] to-[#FCB045]", // Instagram gradient (unchanged)
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/nader-omar-74b79b105/?originalSubdomain=ca",
+      icon: LinkedinLogo,
+      color: "bg-[#0A66C2]", // LinkedIn official blue
+    },
+  ];
+
   const [formData, setFormData] = useState<Record<string, string>>(
     questions.reduce((acc, q) => ({ ...acc, [q.name]: "" }), {})
   );
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
 
   useEffect(() => {
     animate(color, COLORS_TOP, {
@@ -122,13 +143,13 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
     } catch (error) {
       setError("Failed to submit form. Please try again.");
       setSuccess(null);
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
     <motion.section
-    id='contact'
+      id="contact"
       ref={sectionRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -138,8 +159,6 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
       <div className="relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
           <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
-        
-             
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
@@ -149,7 +168,7 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
             >
               <img src={imageSrc} alt={imageAlt} className="h-full w-full object-cover" />
             </motion.div>
-  
+
             <motion.h2
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -167,27 +186,34 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
             >
               {paragraph}
             </motion.p>
-         
           </div>
           <form
             onSubmit={handleSubmit}
             className="w-full md:w-1/2 flex flex-col justify-center items-center"
           >
-            <p className="font-semibold mt-[-3rem] mb-4
-            sm:text-lg">Fill in this form with your real estate needs and I will gladly get back to you shortly
-
+            <p className="font-semibold mt-[-3rem] mb-4 sm:text-lg">
+              Fill in this form with your real estate needs and I will gladly get back to you shortly
             </p>
-            {/* <div className="mr-auto flex flex-col mb-4">
-
-               
-<span><span className="font-bold
-text-md sm:text-lg md:text-xl">
-Phone: </span> (782)-321-3393</span>
-&nbsp;
-<span><span className="font-bold
-text-md sm:text-lg md:text-xl">
-Email: </span> naderomar@remax.ca</span>
-</div> */}
+            <div className="flex gap-4 mb-4">
+              {socialLinks.map(({ name, href, icon: Icon, gradient,color }, index) => (
+                <motion.a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  variants={staggerItem}
+                  custom={index}
+                  className={`w-10 h-10 flex items-center justify-center rounded-full ${
+                    gradient ? `bg-gradient-to-r ${gradient}` : `${color}`
+                  } hover:scale-110 transition-transform`}
+                >
+                  <Icon size={24} color="#ffffff" weight="fill" />
+                </motion.a>
+              ))}
+            </div>
             {questions.map((question, index) => (
               <motion.div
                 key={question.name}
