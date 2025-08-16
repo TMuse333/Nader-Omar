@@ -102,7 +102,7 @@ const ContactCloser: React.FC<ContactCloserProps> = ({
     },
     {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/nader-omar-74b79b105/?originalSubdomain=ca",
+      href: "https://www.linkedin.com/in/nader-omar-89407733b/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
       icon: LinkedinLogo,
       color: "bg-[#0A66C2]", // LinkedIn official blue
     },

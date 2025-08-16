@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
   }[] = [
     { name: "Facebook", href: "https://facebook.com/yourprofile", icon: FacebookLogo },
     { name: "Instagram", href: "https://instagram.com/yourprofile", icon: InstagramLogo },
-    { name: "LinkedIn", href: "https://linkedin.com/in/yourprofile", icon: LinkedinLogo },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/nader-omar-89407733b/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", icon: LinkedinLogo },
   ];
 
   return (
