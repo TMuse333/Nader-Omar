@@ -12,7 +12,7 @@ const DashboardPage = () => {
   const [error, setError] = useState("");
 
   const checkPassword = () => {
-    if (password === "xxx") {
+    if (password === "getMoreLeads#93") {
       setAuthenticated(true);
       setError("");
     } else {
