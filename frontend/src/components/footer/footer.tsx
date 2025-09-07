@@ -3,11 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { FacebookLogo, InstagramLogo, LinkedinLogo } from "phosphor-react";
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Process", href: "/buy-home-fall-river" },
-    { name: "Contact", href: "#contact" },
+    ...(marketPage ? [] : [
+      { name: "Contact", href: "#contact" },
+      { name: "Free Market Evaluation", href: "/free-market-evaluation" }
+    ]),
   ];
 
   const socialLinks: {

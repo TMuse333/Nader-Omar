@@ -5,7 +5,7 @@ import { motion, useMotionValue, animate } from "framer-motion";
 import Link from "next/link";
 
 interface NavbarProps {
-  excludedLink: "Home" | "Process";
+  excludedLink: "Home" | "Process" | "Free Market Evaluation";
 }
 
 const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
@@ -26,6 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Process", href: "/buy-home-fall-river" },
+    {name: 'Free Market Evaluation', href:'/free-market-evaluation'}
   ].filter((item) => item.name !== excludedLink);
 
   const scrollToContact = () => {
@@ -43,7 +44,7 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-blue-100/10 backdrop-blur-md"
+      className="fixed top-0 left-0 right-0 z-50 bg-blue-100 backdrop-blur-md"
     >
       <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
