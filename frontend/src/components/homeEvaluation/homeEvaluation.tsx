@@ -169,7 +169,8 @@ const HomeEvaluation = () => {
       className="relative w-full max-w-5xl mx-auto my-12 px-4 py-16 text-gray-900 overflow-hidden rounded-xl bg-gradient-to-br from-blue-100 to-white"
     >
       <div className="relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-8
+        md:mt-[-4rem]">
           <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
