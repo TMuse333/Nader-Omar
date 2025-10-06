@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import nader from '../../../public/nader.jpg';
 import Image from "next/image";
+import Link from "next/link";
 
 const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
 
@@ -159,6 +160,10 @@ const HomeEvaluation = () => {
     }
   };
 
+  const privacyText = `
+  I agree to be contacted by Nader Omar via call, email, and text for real estate services. To opt out, you can reply 'stop' at any time or reply
+  "help' for assistance. You can also click the unsubscribe link in the emails. Message and data rates may apply. Message frequency may vary. `
+
   return (
     <motion.section
       id="home-evaluation"
@@ -280,14 +285,23 @@ const HomeEvaluation = () => {
               animate={isInView ? "visible" : "hidden"}
               variants={fadeInUp}
               transition={{ delay: 0.4 + fields.length * 0.1 }}
-              className="relative z-20"
+              className="relative z-20 flex flex-col items-center
+              justify-center"
             >
+           <p>
+            {privacyText}&nbsp;
+            <Link href="/privacy" className="underline text-blue-600 hover:text-blue-800">
+Privacy Policy </Link>
+        
+
+           </p>
               <motion.button
                 type="submit"
                 style={{ border: border.get(), boxShadow: boxShadow.get() }}
                 whileHover={{ scale: 1.05, backgroundColor: "#bfdbfe" }}
                 whileTap={{ scale: 0.95 }}
-                className="relative inline-flex items-center gap-2 rounded-full bg-blue-200 px-8 py-4 text-lg font-semibold text-gray-900 transition-colors z-20"
+                className="relative mt-12 inline-flex items-center gap-2 rounded-full bg-blue-200 px-8 py-4 text-lg font-semibold text-gray-900 transition-colors z-20
+                "
               >
                 SUBMIT
                 <motion.span

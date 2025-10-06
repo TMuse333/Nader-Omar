@@ -11,6 +11,7 @@ const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
       { name: "Contact", href: "#contact" },
       { name: "Free Market Evaluation", href: "/free-market-evaluation" }
     ]),
+    { name:'Privacy', href:'/privacy'}
   ];
 
   const socialLinks: {
