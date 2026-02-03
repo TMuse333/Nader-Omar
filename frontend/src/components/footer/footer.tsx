@@ -7,11 +7,14 @@ const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Process", href: "/buy-home-fall-river" },
-    ...(marketPage ? [] : [
-      { name: "Contact", href: "#contact" },
-      { name: "Free Market Evaluation", href: "/free-market-evaluation" }
-    ]),
-    { name:'Privacy', href:'/privacy'}
+    ...(marketPage
+      ? []
+      : [
+          { name: "Contact", href: "#contact" },
+          { name: "Free Market Evaluation", href: "/free-market-evaluation" },
+        ]),
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Cookie Policy", href: "/cookie-policy" },
   ];
 
   const socialLinks: {
@@ -19,64 +22,70 @@ const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
     href: string;
     icon: React.ElementType;
   }[] = [
-    { name: "Facebook", href: "https://facebook.com/yourprofile", icon: FacebookLogo },
-    { name: "Instagram", href: "https://instagram.com/yourprofile", icon: InstagramLogo },
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/nader-omar-89407733b/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", icon: LinkedinLogo },
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/p/Nader-Omar-Remax-Nova-61566969102547/",
+      icon: FacebookLogo,
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/nader_omar_realtor/",
+      icon: InstagramLogo,
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/nader-omar-89407733b/",
+      icon: LinkedinLogo,
+    },
   ];
 
   return (
-    <footer className="w-full bg-[#0e0e0e] text-gray-200 border-t border-gray-700">
-      <div className="max-w-[1200px] mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+    <footer className="w-full bg-[#0a0a0a] text-gray-300 border-t border-white/5">
+      <div className="max-w-[1200px] mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand */}
-        <div className="flex flex-col-reverse">
-          <Link href="/" className="flex flex-col items-center md:items-start">
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white mt-4">
-              Nader Omar | RE/MAX
-            </span>
-          </Link>
+        <div className="flex flex-col items-center md:items-start">
           <Image
             src="/remax-nova-flag.webp"
-            alt="remax nova logo"
-            width={600}
-            height={1300}
-            className="w-[100px] mb-8 scale-[1.5] rounded-md mt-4 mx-auto bg-white object-cover"
+            alt="RE/MAX Nova logo"
+            width={100}
+            height={100}
+            className="w-[80px] rounded-lg bg-white p-2 mb-4"
           />
+          <Link href="/" className="flex flex-col items-center md:items-start">
+            <span className="text-xl font-bold text-white">
+              Nader Omar | <span className="text-cyan-400">RE/MAX</span>
+            </span>
+          </Link>
+          <p className="text-sm text-gray-500 mt-4 text-center md:text-left">
+            Your trusted partner for Fall River and Halifax real estate.
+          </p>
         </div>
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
-            Contact
-          </h3>
-          <p className="text-sm sm:text-base md:text-lg mb-2">
-            32 Akerley Blvd, Dartmouth, NS B3B 1N1
-          </p>
-          <p className="text-sm sm:text-base md:text-lg mb-2">
-            <a
-              href="tel:+17823213393"
-              className="hover:text-[#00bfff] transition-colors"
-            >
-              (782)-321-3393
-            </a>
-          </p>
-          <p className="text-sm sm:text-base md:text-lg mb-2">
-            <a
-              href="mailto:naderomar@remax.ca"
-              className="hover:text-[#00bfff] transition-colors"
-            >
-              naderomar@remax.ca
-            </a>
-          </p>
-          <a
-            href="#contact"
-            className="text-sm sm:text-base md:text-lg hover:text-[#00bfff] transition-colors underline"
-          >
-            Get in Touch
-          </a>
+          <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
+          <div className="space-y-3 text-sm">
+            <p className="text-gray-400">32 Akerley Blvd, Dartmouth, NS B3B 1N1</p>
+            <p>
+              <a
+                href="tel:+17823213393"
+                className="hover:text-cyan-400 transition-colors"
+              >
+                (782) 321-3393
+              </a>
+            </p>
+            <p>
+              <a
+                href="mailto:naderomar@remax.ca"
+                className="hover:text-cyan-400 transition-colors"
+              >
+                naderomar@remax.ca
+              </a>
+            </p>
+          </div>
 
           {/* Social Icons */}
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-3 mt-6">
             {socialLinks.map(({ name, href, icon: Icon }) => (
               <a
                 key={name}
@@ -84,7 +93,7 @@ const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={name}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#00bfff] text-white transition-colors"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-cyan-500 hover:border-cyan-500 text-gray-400 hover:text-white transition-all duration-300"
               >
                 <Icon size={18} weight="fill" />
               </a>
@@ -94,15 +103,13 @@ const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
 
         {/* Navigation */}
         <div>
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
-            Navigation
-          </h3>
-          <ul className="space-y-4">
+          <h3 className="text-lg font-semibold text-white mb-4">Navigation</h3>
+          <ul className="space-y-3">
             {navItems.map((item) => (
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-sm sm:text-base md:text-lg hover:text-[#00bfff] transition-colors"
+                  className="text-sm hover:text-cyan-400 transition-colors"
                 >
                   {item.name}
                 </a>
@@ -112,15 +119,22 @@ const Footer: React.FC<{ marketPage?: boolean }> = ({ marketPage = false }) => {
         </div>
       </div>
 
-      {/* Developer Credit */}
-      <div className="text-center mt-4 pb-8 px-4 text-xs sm:text-sm md:text-base text-gray-400">
-        Developed by{" "}
-        <a
-          href="https://focusflowsoftware.com"
-          className="hover:text-[#00bfff] transition-colors"
-        >
-          FocusFlow Software
-        </a>
+      {/* Bottom bar */}
+      <div className="border-t border-white/5 py-6">
+        <div className="max-w-[1200px] mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-gray-500">
+            &copy; {new Date().getFullYear()} Nader Omar Real Estate. All rights reserved.
+          </p>
+          <p className="text-xs text-gray-500">
+            Developed by{" "}
+            <a
+              href="https://focusflowsoftware.com"
+              className="hover:text-cyan-400 transition-colors"
+            >
+              FocusFlow Software
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );

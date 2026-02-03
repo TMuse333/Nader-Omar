@@ -5,10 +5,10 @@ import { motion, useMotionValue, animate } from "framer-motion";
 import Link from "next/link";
 
 interface NavbarProps {
-  excludedLink: "Home" | "Process" | "Free Market Evaluation";
+  excludedLink: "Home" | "Process" | "Free Market Evaluation" | "About" | "Offer" | "";
 }
 
-const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
+const COLORS_TOP = ["#06b6d4", "#22d3ee", "#67e8f9", "#a5f3fc"];
 
 const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,8 +25,10 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
 
   const navItems = [
     { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
     { name: "Process", href: "/buy-home-fall-river" },
-    {name: 'Free Market Evaluation', href:'/free-market-evaluation'}
+    { name: "Free Market Evaluation", href: "/free-market-evaluation" },
+    { name: "Offer", href: "/offer" },
   ].filter((item) => item.name !== excludedLink);
 
   const scrollToContact = () => {
@@ -44,16 +46,16 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-blue-100 backdrop-blur-md"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-b border-white/5"
     >
       <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-semibold text-gray-900"
+            className="text-xl font-semibold text-white"
           >
-            Nader Omar | RE/MAX
+            Nader Omar | <span className="text-cyan-400">RE/MAX</span>
           </motion.div>
         </Link>
 
@@ -62,23 +64,27 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
           {navItems.map((item) => (
             <Link key={item.name} href={item.href}>
               <motion.div
-                whileHover={{ scale: 1.1, color: color.get() }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-gray-900 font-medium hover:text-blue-600 transition-colors"
+                className={
+                  item.name === "Offer"
+                    ? "text-cyan-400 font-medium px-3 py-1 rounded-full border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 transition-colors"
+                    : "text-gray-300 font-medium hover:text-cyan-400 transition-colors"
+                }
               >
                 {item.name}
               </motion.div>
             </Link>
           ))}
-          {/* Contact scroll link for desktop */}
-          <motion.div
+          {/* Contact button for desktop */}
+          <motion.button
             onClick={scrollToContact}
-            whileHover={{ scale: 1.1, color: color.get() }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-gray-900 font-medium hover:text-blue-600 transition-colors cursor-pointer"
+            className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white font-medium rounded-full transition-colors"
           >
             Contact
-          </motion.div>
+          </motion.button>
         </div>
 
         {/* Mobile Burger Button */}
@@ -88,17 +94,17 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
           whileTap={{ scale: 0.9 }}
         >
           <motion.span
-            className="bg-gray-900 h-0.5 w-6 mb-1.5"
+            className="bg-white h-0.5 w-6 mb-1.5"
             animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
             transition={{ duration: 0.3 }}
           />
           <motion.span
-            className="bg-gray-900 h-0.5 w-6 mb-1.5"
+            className="bg-white h-0.5 w-6 mb-1.5"
             animate={{ opacity: isOpen ? 0 : 1 }}
             transition={{ duration: 0.3 }}
           />
           <motion.span
-            className="bg-gray-900 h-0.5 w-6"
+            className="bg-white h-0.5 w-6"
             animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
             transition={{ duration: 0.3 }}
           />
@@ -110,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
         initial={{ height: 0, opacity: 0 }}
         animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className="md:hidden overflow-hidden bg-blue-100/90 backdrop-blur-md"
+        className="md:hidden overflow-hidden bg-[#1a1a1a]/95 backdrop-blur-md"
       >
         <div className="flex flex-col items-center py-4">
           {navItems.map((item, index) => (
@@ -119,7 +125,11 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.3 }}
-                className="py-2 text-gray-900 font-medium hover:text-blue-600 transition-colors"
+                className={
+                  item.name === "Offer"
+                    ? "py-2 px-4 my-1 text-cyan-400 font-medium rounded-full border border-cyan-500/40 bg-cyan-500/10"
+                    : "py-2 text-gray-300 font-medium hover:text-cyan-400 transition-colors"
+                }
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -132,7 +142,7 @@ const Navbar: React.FC<NavbarProps> = ({ excludedLink }) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.3 }}
-            className="py-2 text-gray-900 font-medium hover:text-blue-600 transition-colors cursor-pointer"
+            className="py-2 text-cyan-400 font-medium cursor-pointer"
           >
             Contact
           </motion.div>

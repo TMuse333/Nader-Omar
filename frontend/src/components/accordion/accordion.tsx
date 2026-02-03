@@ -1,10 +1,8 @@
-"use client"
+"use client";
 
 import React, { useState, useRef } from "react";
-import { motion, Variants, useInView, AnimatePresence, useMotionTemplate, useMotionValue, animate } from "framer-motion";
+import { motion, Variants, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-
-const COLORS_TOP = ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
 
 interface Props {
   text: {
@@ -25,7 +23,6 @@ const Accordion: React.FC<Props> = ({
   intro,
   description,
   link,
-  margin,
   inContent,
 }) => {
   const componentRef = useRef(null);
@@ -37,19 +34,6 @@ const Accordion: React.FC<Props> = ({
   const totalPages = Math.ceil(text.length / elementsPerPage);
   const startIndex = (currentPage - 1) * elementsPerPage;
   const currentElements = text.slice(startIndex, startIndex + elementsPerPage);
-
-  const color = useMotionValue(COLORS_TOP[0]);
-  React.useEffect(() => {
-    animate(color, COLORS_TOP, {
-      ease: "easeInOut",
-      duration: 10,
-      repeat: Infinity,
-      repeatType: "mirror",
-    });
-  }, []);
-
-  const border = useMotionTemplate`1px solid ${color}`;
-  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -79,32 +63,33 @@ const Accordion: React.FC<Props> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className={`flex flex-col justify-start items-center py-12 text-gray-900 ${
+      className={`flex flex-col justify-start items-center py-16 px-4 dark-bg ${
         inContent ? "md:max-w-[350px]" : ""
       }`}
     >
       {hasIntro && (
-        <div className="text-center mb-8">
+        <div className="text-center mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-semibold bg-gradient-to-br from-gray-900 to-blue-600 bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            {intro}
+            <span className="gradient-text-accent">{intro}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-4 max-w-2xl mx-auto text-base leading-relaxed text-gray-700 md:text-lg"
+            className="max-w-2xl mx-auto text-gray-400 text-sm md:text-base leading-relaxed"
           >
             {description}
           </motion.p>
         </div>
       )}
+
       <section
-        className={`rounded-xl bg-blue-50 shadow-lg ${margin ? `md:${margin}` : ""}`}
+        className="rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-white/10 w-full max-w-4xl"
         ref={componentRef}
       >
         <div className="flex flex-col">
@@ -113,38 +98,37 @@ const Accordion: React.FC<Props> = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex justify-center space-x-4 mb-4 p-4"
+              className="flex justify-center items-center gap-4 p-4 border-b border-white/10"
             >
-              <motion.button
+              <button
                 onClick={handlePrevPage}
                 disabled={currentPage === 1}
-                style={currentPage !== 1 ? { border: border.get(), boxShadow: boxShadow.get() } : {}}
-                className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                className={`px-4 py-2 rounded-full font-medium text-sm transition-all ${
                   currentPage === 1
-                    ? "bg-blue-200/50 text-gray-500 cursor-not-allowed"
-                    : "bg-blue-200/30 text-gray-900 hover:bg-blue-200/50"
+                    ? "bg-white/5 text-gray-500 cursor-not-allowed"
+                    : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20"
                 }`}
               >
                 Previous
-              </motion.button>
-              <span className="text-gray-700 font-medium flex items-center">
+              </button>
+              <span className="text-gray-400 text-sm">
                 Page {currentPage} of {totalPages}
               </span>
-              <motion.button
+              <button
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
-                style={currentPage !== totalPages ? { border: border.get(), boxShadow: boxShadow.get() } : {}}
-                className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                className={`px-4 py-2 rounded-full font-medium text-sm transition-all ${
                   currentPage === totalPages
-                    ? "bg-blue-200/50 text-gray-500 cursor-not-allowed"
-                    : "bg-blue-200/30 text-gray-900 hover:bg-blue-200/50"
+                    ? "bg-white/5 text-gray-500 cursor-not-allowed"
+                    : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20"
                 }`}
               >
                 Next
-              </motion.button>
+              </button>
             </motion.div>
           )}
-          <div className="space-y-4 p-4">
+
+          <div className="p-4 space-y-3">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentPage}
@@ -152,7 +136,7 @@ const Accordion: React.FC<Props> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-4"
+                className="space-y-3"
               >
                 {currentElements.map((item, index) => (
                   <motion.div
@@ -161,33 +145,38 @@ const Accordion: React.FC<Props> = ({
                     initial="initial"
                     animate={inView ? "animate" : "initial"}
                     onClick={() => handleSectionClick(startIndex + index)}
-                    className="border-b border-blue-200/50 p-4 rounded-lg bg-blue-100/50 hover:bg-blue-100 transition-colors cursor-pointer relative max-w-4xl mx-auto"
-                    style={{ boxShadow: boxShadow.get() }}
+                    className={`p-4 rounded-xl cursor-pointer relative transition-all ${
+                      expandedIndex === startIndex + index
+                        ? "bg-cyan-500/10 border border-cyan-500/30"
+                        : "bg-white/5 border border-white/10 hover:bg-white/10"
+                    }`}
                   >
-                    <button className="absolute top-4 right-4 text-gray-700">
-                      {expandedIndex === startIndex + index ? (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M4 15l8-8 8 8" />
-                        </svg>
-                      ) : (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M4 9l8 8 8-8" />
-                        </svg>
-                      )}
-                    </button>
-                    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-3 pr-12">
-                      {item.title}
-                    </h2>
+                    <div className="flex items-start justify-between gap-4">
+                      <h3 className="text-base sm:text-lg font-semibold text-white flex-1">
+                        {item.title}
+                      </h3>
+                      <button className="text-cyan-400 shrink-0 mt-1">
+                        {expandedIndex === startIndex + index ? (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M4 15l8-8 8 8" />
+                          </svg>
+                        ) : (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M4 9l8 8 8-8" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{
                         height: expandedIndex === startIndex + index ? "auto" : 0,
                         opacity: expandedIndex === startIndex + index ? 1 : 0,
                       }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="text-base text-gray-700 leading-relaxed pt-2">
+                      <p className="text-gray-400 text-sm leading-relaxed pt-3">
                         {item.description}
                       </p>
                     </motion.div>
@@ -198,6 +187,7 @@ const Accordion: React.FC<Props> = ({
           </div>
         </div>
       </section>
+
       {link && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -206,14 +196,12 @@ const Accordion: React.FC<Props> = ({
           className="mt-8"
         >
           <Link href={link}>
-            <motion.button
-              style={{ border: border.get(), boxShadow: boxShadow.get() }}
-              whileHover={{ scale: 1.015 }}
-              whileTap={{ scale: 0.985 }}
-              className="group relative flex w-fit mx-auto items-center gap-1.5 rounded-full bg-blue-200/30 px-6 py-3 text-gray-900 transition-colors hover:bg-blue-200/50 font-semibold"
-            >
+            <button className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25">
               Learn More
-            </motion.button>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
           </Link>
         </motion.div>
       )}

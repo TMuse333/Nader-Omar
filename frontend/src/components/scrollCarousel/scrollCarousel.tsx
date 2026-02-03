@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 interface Step {
   number: number;
@@ -13,42 +14,44 @@ const buyerJourneySteps: Step[] = [
     number: 1,
     title: "Define Your Vision & Budget",
     description:
-      "We’ll start with a personal consultation to explore your lifestyle goals, must-haves, and what drew you to Fall River. I’ll connect you with trusted mortgage experts to get pre-approved, helping you understand your budget and buying power. We’ll discuss family size, commute, amenities like schools or parks, and set realistic expectations based on your financial readiness.",
+      "We'll start with a personal consultation to explore your lifestyle goals, must-haves, and what drew you to Fall River. I'll connect you with trusted mortgage experts to get pre-approved, helping you understand your budget and buying power. We'll discuss family size, commute, amenities like schools or parks, and set realistic expectations based on your financial readiness.",
   },
   {
     number: 2,
     title: "Understand the Market & Costs",
     description:
-      "You’ll receive a detailed overview of the Fall River real estate market, including current prices (around $930,900 as of May 2025), competition, and timelines (homes often sell within 30 days). We’ll break down all costs—down payment, closing fees, property taxes, and more—so you’re fully prepared and confident.",
+      "You'll receive a detailed overview of the Fall River real estate market, including current prices (around $930,900 as of May 2025), competition, and timelines (homes often sell within 30 days). We'll break down all costs—down payment, closing fees, property taxes, and more—so you're fully prepared and confident.",
   },
   {
     number: 3,
     title: "Start the Home Search",
     description:
-      "I’ll set up a personalized MLS search with real-time listing alerts tailored to your criteria. We’ll review homes together, tour properties, and evaluate their fit based on neighborhood specifics and market value. I’ll help you spot hidden value or concerns, ensuring the home aligns with your vision.",
+      "I'll set up a personalized MLS search with real-time listing alerts tailored to your criteria. We'll review homes together, tour properties, and evaluate their fit based on neighborhood specifics and market value. I'll help you spot hidden value or concerns, ensuring the home aligns with your vision.",
   },
   {
     number: 4,
     title: "Craft a Winning Offer",
     description:
-      "When you find the right home, I’ll create a data-backed offer strategy using a comparative market analysis of recent Fall River sales. We’ll discuss conditions, closing dates, and terms to make your offer competitive yet protective, leveraging my negotiation experience to strengthen your position.",
+      "When you find the right home, I'll create a data-backed offer strategy using a comparative market analysis of recent Fall River sales. We'll discuss conditions, closing dates, and terms to make your offer competitive yet protective, leveraging my negotiation experience to strengthen your position.",
   },
   {
     number: 5,
     title: "Negotiate & Secure the Deal",
     description:
-      "I’ll be your advocate during negotiations and counter-offers, keeping you informed and calm. Post-acceptance, we’ll arrange inspections and appraisals, confirm financing, and ensure all conditions are met, guiding you smoothly through this critical phase.",
+      "I'll be your advocate during negotiations and counter-offers, keeping you informed and calm. Post-acceptance, we'll arrange inspections and appraisals, confirm financing, and ensure all conditions are met, guiding you smoothly through this critical phase.",
   },
   {
     number: 6,
     title: "Close & Celebrate",
     description:
-      "Before closing, we’ll do a final walk-through and coordinate with your real estate lawyer for title searches and paperwork. On closing day, you’ll receive your keys, and I’ll be there to celebrate! My support continues post-sale for any future needs or questions.",
+      "Before closing, we'll do a final walk-through and coordinate with your real estate lawyer for title searches and paperwork. On closing day, you'll receive your keys, and I'll be there to celebrate! My support continues post-sale for any future needs or questions.",
   },
 ];
 
 const ScrollCarousel = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -74,97 +77,117 @@ const ScrollCarousel = () => {
     }
   };
 
-  const StepCard = ({ step }: { step: Step }) => (
-    <div className="relative w-[95vw] max-w-[600px] h-[600px] bg-blue-50 rounded-lg flex flex-col items-center justify-center p-8 shadow-lg flex-shrink-0">
-      <div className="relative w-[100px] h-[100px] flex items-center justify-center mb-6">
-        <svg width="100" height="100" viewBox="0 0 100 100">
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="#3B82F6"
-            strokeWidth="4"
-            fill="none"
-            strokeDasharray="282.6"
-          />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-900">
+  const StepCard = ({ step, index }: { step: Step; index: number }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative w-[90vw] max-w-[500px] min-h-[480px] rounded-2xl flex flex-col p-8 flex-shrink-0 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-white/10 hover:border-cyan-500/30 transition-colors"
+    >
+      {/* Step number */}
+      <div className="relative w-16 h-16 flex items-center justify-center mb-6">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/30" />
+        <span className="relative text-2xl font-bold gradient-text-accent">
           {step.number}
-        </div>
+        </span>
       </div>
-      <h3 className="text-2xl font-semibold text-center text-gray-900 mb-4">
+
+      <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
         {step.title}
       </h3>
-      <p className="text-base text-left text-gray-700 leading-relaxed">
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed flex-1">
         {step.description}
       </p>
-    </div>
+
+      {/* Progress indicator */}
+      <div className="mt-6 flex items-center gap-2">
+        <div className="h-1 flex-1 bg-white/10 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full"
+            style={{ width: `${(step.number / 6) * 100}%` }}
+          />
+        </div>
+        <span className="text-xs text-gray-500">{step.number}/6</span>
+      </div>
+    </motion.div>
   );
 
   return (
-    <section className="bg-blue-100 py-24">
-      <div className="mx-auto max-w-5xl">
-        <h2 className="mb-8 bg-gradient-to-br from-gray-900 to-blue-600 bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-4xl md:text-5xl">
-          Your Path to Homeownership in Fall River
-        </h2>
-        <p className="mb-12 max-w-2xl mx-auto text-center text-base leading-relaxed text-gray-700 md:text-lg">
-          Buying a home in Fall River, Nova Scotia, is a journey we’ll navigate together. Our detailed process ensures you’re informed, confident, and excited every step of the way.
-        </p>
-        <div className="flex h-24 items-center justify-center">
-          <span className="font-semibold uppercase text-gray-600">
-            Scroll or use arrows to explore
+    <section ref={sectionRef} className="dark-bg-accent py-20 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-4">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Your <span className="gradient-text-accent">Path</span> to Homeownership
+          </h2>
+          <p className="max-w-2xl mx-auto text-gray-400 text-sm md:text-base leading-relaxed">
+            Buying a home in Fall River, Nova Scotia, is a journey we&apos;ll navigate
+            together. Our detailed process ensures you&apos;re informed, confident, and
+            excited every step of the way.
+          </p>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex items-center justify-center gap-2 mb-8"
+        >
+          <svg className="w-5 h-5 text-cyan-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
+          <span className="text-sm text-gray-500 uppercase tracking-wider">
+            Scroll or use arrows
           </span>
-        </div>
+          <svg className="w-5 h-5 text-cyan-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </motion.div>
+
+        {/* Carousel */}
         <div className="relative">
           <div
             ref={carouselRef}
             onScroll={checkScrollPosition}
-            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pb-4"
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-6 pb-4 scrollbar-hide"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {buyerJourneySteps.map((step, index) => (
-              <StepCard key={index} step={step} />
+              <StepCard key={index} step={step} index={index} />
             ))}
           </div>
+
+          {/* Navigation buttons */}
           <button
             onClick={() => scrollTo("left")}
             disabled={!canScrollLeft}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 bg-blue-200/30 p-3 rounded-full text-gray-900 ${
-              canScrollLeft ? "opacity-100 hover:bg-blue-200/50" : "opacity-50 cursor-not-allowed"
-            } transition-opacity`}
+            className={`absolute left-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm ${
+              canScrollLeft
+                ? "opacity-100 hover:bg-cyan-500/20 hover:border-cyan-500/50"
+                : "opacity-30 cursor-not-allowed"
+            } transition-all`}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={() => scrollTo("right")}
             disabled={!canScrollRight}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 bg-blue-200/30 p-3 rounded-full text-gray-900 ${
-              canScrollRight ? "opacity-100 hover:bg-blue-200/50" : "opacity-50 cursor-not-allowed"
-            } transition-opacity`}
+            className={`absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm ${
+              canScrollRight
+                ? "opacity-100 hover:bg-cyan-500/20 hover:border-cyan-500/50"
+                : "opacity-30 cursor-not-allowed"
+            } transition-all`}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
