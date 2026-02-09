@@ -1,3 +1,5 @@
+"use client";
+
 import { useGeneralContext } from "@/context/context";
 import React, { useState } from "react";
 import { Blog } from "@/context/context";
@@ -52,10 +54,8 @@ const sampleBlogIdeas: Blog[] = [
 
 
 const BlogList: React.FC = () => {
-
   const [showModal, setShowModal] = useState(false);
   const [pendingBlog, setPendingBlog] = useState<Blog | null>(null);
-
   const { setSelectedBlog } = useGeneralContext();
 
   const handleBlogClick = (blog: Blog) => {
@@ -70,64 +70,98 @@ const BlogList: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto bg-gradient-to-b from-gray-50 to-white rounded-xl shadow-sm">
-      <div className="flex flex-col justify-between items-start p-6 border-b border-gray-200">
-        <h2 className="font-bold text-2xl text-gray-800 mb-3">Blog Ideas</h2>
-        <p className="text-gray-600">
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-6">
+        <h2 className="font-bold text-2xl text-white mb-2">✍️ Blog Ideas</h2>
+        <p className="text-gray-400">
           Select a blog idea to start creating your post. You can choose to answer personalized questions to make your blog post unique and engaging.
         </p>
       </div>
 
-      <div className="p-6 space-y-4">
+      <div className="space-y-4">
         {sampleBlogIdeas.map((blog, idx) => (
           <div
             key={idx}
-            className="border border-gray-200 rounded-lg p-5 bg-white hover:bg-gradient-to-r from-gray-50 to-gray-100 transition-all cursor-pointer shadow-sm hover:shadow-md"
+            className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-5 hover:border-cyan-500/30 transition-all cursor-pointer group"
             onClick={() => handleBlogContainerClick(blog)}
           >
-            <h3 className="font-semibold text-lg text-gray-800 mb-2">{blog.title}</h3>
-            <p className="text-gray-600 mb-3">{blog.description}</p>
-            <div className="text-sm text-gray-700">
-              <strong className="font-medium">Suggested personal notes:</strong>
-              <ul className="list-disc list-inside mt-2 space-y-2">
-                {blog.questions.map((note, nIdx) => (
-                  <li key={nIdx} className="text-gray-600">{note}</li>
-                ))}
-              </ul>
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                  {blog.title}
+                </h3>
+                <p className="text-gray-400 text-sm mb-3">{blog.description}</p>
+                <div className="text-sm">
+                  <p className="text-gray-500 font-medium mb-2">Questions to personalize:</p>
+                  <ul className="space-y-1">
+                    {blog.questions.slice(0, 2).map((note, nIdx) => (
+                      <li key={nIdx} className="text-gray-500 text-xs flex items-start gap-2">
+                        <span className="text-cyan-500">•</span>
+                        {note}
+                      </li>
+                    ))}
+                    {blog.questions.length > 2 && (
+                      <li className="text-gray-600 text-xs">
+                        +{blog.questions.length - 2} more questions...
+                      </li>
+                    )}
+                  </ul>
+                </div>
+                <div className="flex gap-2 mt-3">
+                  {blog.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <span className="text-gray-500 group-hover:text-cyan-400 transition-colors">→</span>
             </div>
           </div>
         ))}
       </div>
 
+      {/* Coming Soon Section */}
+      <div className="mt-8 bg-gradient-to-r from-[#1a1a1a] to-[#1a2a2a] rounded-xl p-6 border border-cyan-500/20">
+        <h3 className="font-bold text-lg text-white mb-2">🚀 Coming Soon</h3>
+        <p className="text-gray-400 text-sm">
+          Blog scheduling, automatic publishing, and AI-powered topic suggestions based on your local market trends.
+        </p>
+      </div>
+
       <AnimatePresence>
         {showModal && pendingBlog && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center z-50 bg-black/60"
+            className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-sm p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setShowModal(false)}
           >
             <motion.div
-              className="bg-white rounded-lg p-8 w-96 text-center shadow-xl"
+              className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] p-8 w-full max-w-md text-center"
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="font-semibold text-xl text-gray-800 mb-4">Start this blog?</h3>
-              <p className="mb-6 text-gray-600">Would you like to answer personal questions for the blog: <strong>{pendingBlog.title}</strong>?</p>
+              <h3 className="font-semibold text-xl text-white mb-4">Start this blog?</h3>
+              <p className="mb-6 text-gray-400">
+                Would you like to answer personal questions for: <span className="text-cyan-400 font-medium">{pendingBlog.title}</span>?
+              </p>
               <div className="flex justify-around gap-4">
                 <button
-                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all"
+                  className="flex-1 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-cyan-700 transition-all shadow-lg shadow-cyan-500/20"
                   onClick={() => handleBlogClick(pendingBlog)}
                 >
-                  Yes
+                  Yes, let&apos;s go
                 </button>
                 <button
-                  className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-all"
+                  className="flex-1 bg-[#2a2a2a] text-gray-300 px-4 py-2 rounded-lg hover:bg-[#3a3a3a] transition-all"
                   onClick={() => setShowModal(false)}
                 >
-                  No
+                  Not now
                 </button>
               </div>
             </motion.div>

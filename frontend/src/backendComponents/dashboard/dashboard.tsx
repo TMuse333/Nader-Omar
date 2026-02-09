@@ -1,32 +1,23 @@
 import React from "react"
-// import AnalyticsWidget from "../analyticsWidget/anaylticsWidget"
+import { Home, Brain, Mail, MessageSquare, FileText } from "lucide-react"
 import BlogList from "../blogList/blogList"
-import DashboardHelp from "../dashboardHelp/dashboardHelp"
-import InternalBot from "../qdrantInput/page"
-import QdrantViewer from "../qdrantViewer/qdrantViewer"
-import Questionnaire from "../questionForm/questionForm"
-// import SearchConsoleDashboard from "../searchConsoleTest/searchConsoleTest"
+import SystemOverview from "../systemOverview/systemOverview"
+import ObjectionCounters from "../objectionCounters/objectionCounters"
+import KnowledgeBrain from "../knowledgeBrain/knowledgeBrain"
+import KnowledgeRequests from "../knowledgeRequests/knowledgeRequests"
 
 import Sidebar from "../sidebar/sidebar"
 
 const Dashboard = () => {
-
-
-  
-
   return (
     <div className="w-screen">
         <Sidebar
         components={[
-          {name:'Help and feedback', element:<DashboardHelp/>},
-          {name:'Submit idea', element: <InternalBot/>},
-          {name: 'Blog ideas', element: <BlogList/>},
-          {name: 'View data', element: <QdrantViewer/>},
-          // {name:'Google Search', element:<SearchConsoleDashboard/>},
-          // {name: 'Google Analytics', element:<AnalyticsWidget/>},
-        
-          {name:'Feedback',element:<Questionnaire/>},
-
+          {name: 'Overview', icon: Home, element: <SystemOverview/>},
+          {name: 'Knowledge Brain', icon: Brain, element: <KnowledgeBrain/>},
+          {name: 'Knowledge Requests', icon: Mail, element: <KnowledgeRequests/>},
+          {name: 'Objection Counters', icon: MessageSquare, element: <ObjectionCounters/>},
+          {name: 'Blog Ideas', icon: FileText, element: <BlogList/>},
         ]}
         />
     </div>

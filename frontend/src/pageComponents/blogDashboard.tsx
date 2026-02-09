@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Dashboard from "@/backendComponents/dashboard/dashboard";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import agent from "../../public/nader.jpg"; // adjust path if needed
+import agent from "../../public/nader.jpg";
 
 const DashboardPage = () => {
   const [password, setPassword] = useState("");
@@ -20,12 +20,18 @@ const DashboardPage = () => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      checkPassword();
+    }
+  };
+
   if (!authenticated) {
     return (
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 p-6"
+        className="min-h-screen flex flex-col items-center justify-center bg-[#0f0f0f] p-6"
       >
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
@@ -33,47 +39,64 @@ const DashboardPage = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center text-center"
         >
-          <div className="h-32 w-32 md:h-48 md:w-48 rounded-full overflow-hidden border-4 border-blue-300 shadow-lg mb-6">
-            <Image
-              src={agent}
-              alt="Nader Omar"
-              width={400}
-              height={400}
-              className="h-full w-full object-cover"
-            />
+          {/* Glowing ring around photo */}
+          <div className="relative mb-8">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 blur-xl opacity-30 animate-pulse" />
+            <div className="relative h-32 w-32 md:h-40 md:w-40 rounded-full overflow-hidden border-2 border-cyan-500/50 shadow-2xl shadow-cyan-500/20">
+              <Image
+                src={agent}
+                alt="Nader Omar"
+                width={400}
+                height={400}
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-gray-900 via-blue-700 to-blue-400 bg-clip-text text-transparent mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Welcome, Nader
           </h2>
-
-          <p className="text-gray-700 text-lg mb-6">
-            Please enter your password to access your dashboard.
+          <p className="text-gray-500 text-sm mb-8">
+            Enter your password to access the dashboard
           </p>
 
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="px-4 py-2 w-64 border border-black text-black rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-            placeholder="Enter password"
-          />
-          <button
-            onClick={checkPassword}
-            className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
-          >
-            Enter
-          </button>
+          <div className="w-full max-w-xs space-y-4">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
+              className="w-full px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent placeholder-gray-500"
+              placeholder="Enter password"
+            />
+            <button
+              onClick={checkPassword}
+              className="w-full py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-cyan-700 transition-all shadow-lg shadow-cyan-500/20"
+            >
+              Access Dashboard
+            </button>
+          </div>
 
-          {error && <p className="text-red-600 mt-4">{error}</p>}
+          {error && (
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-red-400 mt-4 text-sm"
+            >
+              {error}
+            </motion.p>
+          )}
+
+          <p className="text-gray-600 text-xs mt-8">
+            Powered by FocusFlow Software
+          </p>
         </motion.div>
       </motion.main>
     );
   }
 
-  // ✅ Show dashboard once password is correct
   return (
-    <main className="bg-blue-100 text-black min-h-screen">
+    <main className="bg-[#0f0f0f] text-white min-h-screen">
       <Dashboard />
     </main>
   );
